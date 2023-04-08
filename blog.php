@@ -1,8 +1,12 @@
+<?php
+require_once 'config/connect.php';
+$posts = mysqli_query($connect, "SELECT * FROM `posts`");
+$posts = mysqli_fetch_all($posts);
+
+?>
+
 <!DOCTYPE html>
-<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 8)|!(IE)]><!-->
-<html class="no-js" lang="en"> <!--<![endif]-->
+<html class="no-js" lang="en">
 
 <head>
 
@@ -65,12 +69,53 @@
       <div id="page-content" class="row">
 
          <div id="primary" class="eight columns">
+            <?php
 
+            $per_page = 3;
+
+
+
+            foreach ($posts as $post) {
+            ?>
+               <article class="post">
+
+                  <div class="entry-header cf">
+
+                     <h1><a href="single.php" title=""><?php echo $post[1]; ?></a></h1>
+
+                     <p class="post-meta">
+
+                        <time class="date" datetime="2014-01-14"><?php echo $post[4]; ?></time>
+                        /
+                        <!-- <span class="categories">
+                        <a href="#">Design</a> /
+                        <a href="#">User Inferface</a> /
+                        <a href="#">Web Design</a>
+                     </span> -->
+
+                     </p>
+
+                  </div>
+
+                  <div class="post-thumb">
+                     <a href="single.php" title=""><img src="<?php echo $post[2]; ?>" alt="post-image" title="post-image"></a>
+                  </div>
+
+                  <div class="post-content">
+
+                     <p><?php echo substr($post[3], 0, 340); ?></p>
+
+                  </div>
+
+               </article> <!-- post end -->
+            <?php
+            }
+            ?>
             <article class="post">
 
                <div class="entry-header cf">
 
-                  <h1><a href="single.html" title="">Proin gravida nibh vel velit auctor aliquet Aenean sollicitudin auctor.</a></h1>
+                  <h1><a href="single.php" title="">Proin gravida nibh vel velit auctor aliquet Aenean sollicitudin auctor.</a></h1>
 
                   <p class="post-meta">
 
@@ -87,7 +132,7 @@
                </div>
 
                <div class="post-thumb">
-                  <a href="single.html" title=""><img src="images/post-image/post-image-1300x500-01.jpg" alt="post-image" title="post-image"></a>
+                  <a href="single.php" title=""><img src="images/post-image/post-image-1300x500-01.jpg" alt="post-image" title="post-image"></a>
                </div>
 
                <div class="post-content">
@@ -101,75 +146,6 @@
 
             </article> <!-- post end -->
 
-            <article class="post">
-
-               <div class="entry-header cf">
-
-                  <h1><a href="single.html" title="">Proin gravida nibh vel velit auctor aliquet Aenean sollicitudin auctor.</a></h1>
-
-                  <p class="post-meta">
-
-                     <time class="date" datetime="2014-01-14T11:24">Jan 14, 2013</time>
-                     /
-                     <span class="categories">
-                        <a href="#">Design</a> /
-                        <a href="#">User Inferface</a> /
-                        <a href="#">Web Design</a>
-                     </span>
-
-                  </p>
-
-               </div>
-
-               <div class="post-thumb">
-                  <a href="single.html" title=""><img src="images/post-image/post-image-1300x500-02.jpg" alt="post-image" title="post-image"></a>
-               </div>
-
-               <div class="post-content">
-
-                  <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,
-                     nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate
-                     cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a
-                     ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. </p>
-
-               </div>
-
-            </article> <!-- post end -->
-
-            <article class="post">
-
-               <div class="entry-header cf">
-
-                  <h1><a href="single.html" title="">Proin gravida nibh vel velit auctor aliquet Aenean sollicitudin auctor.</a></h1>
-
-                  <p class="post-meta">
-
-                     <time class="date" datetime="2014-01-14T11:24">Jan 14, 2014</time>
-                     /
-                     <span class="categories">
-                        <a href="#">Design</a> /
-                        <a href="#">User Inferface</a> /
-                        <a href="#">Web Design</a>
-                     </span>
-
-                  </p>
-
-               </div>
-
-               <div class="post-thumb">
-                  <a href="single.html" title=""><img src="images/post-image/post-image-1300x500-03.jpg" alt="post-image" title="post-image"></a>
-               </div>
-
-               <div class="post-content">
-
-                  <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,
-                     nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate
-                     cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a
-                     ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. </p>
-
-               </div>
-
-            </article> <!-- post end -->
 
             <!-- Pagination -->
             <nav class="col full pagination">

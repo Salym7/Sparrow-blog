@@ -1,34 +1,24 @@
+<?php
+require_once 'config/connect.php';
+$works = mysqli_query($connect, "SELECT * FROM `works`");
+$works = mysqli_fetch_all($works);
+
+?>
+
 <!DOCTYPE html>
-<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 8)|!(IE)]><!-->
 <html class="no-js" lang="en"> <!--<![endif]-->
 
 <head>
 
-   <!--- Basic Page Needs
-   ================================================== -->
    <meta charset="utf-8">
    <title>Portfolio | Sparrow</title>
    <meta name="description" content="">
    <meta name="author" content="">
-
-   <!-- Mobile Specific Metas
-   ================================================== -->
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-   <!-- CSS
-    ================================================== -->
    <link rel="stylesheet" href="css/default.css">
    <link rel="stylesheet" href="css/layout.css">
    <link rel="stylesheet" href="css/media-queries.css">
-
-   <!-- Script
-   ================================================== -->
    <script src="js/modernizr.js"></script>
-
-   <!-- Favicons
-	================================================== -->
    <link rel="shortcut icon" href="favicon.ico">
 
 </head>
@@ -82,7 +72,26 @@
 
             <div id="primary" class="eight columns portfolio-list">
 
-               <div id="portfolio-wrapper" class="bgrid-halves cf">
+               <div class="works-wrapper">
+                  <?php
+                  foreach ($works as $work) {
+                  ?>
+                     <div class="columns portfolio-item">
+                        <div class="item-wrap">
+                           <a href="portfolio.html">
+                              <img alt="" src="<?php echo $work[4]; ?>">
+                              <div class="overlay"></div>
+                              <div class="link-icon"><i class="fa fa-link"></i></div>
+                           </a>
+                           <div class="portfolio-item-meta">
+                              <h5><a href="portfolio.html"><?php echo $work[1]; ?></a></h5>
+                              <p>Illustrration</p>
+                           </div>
+                        </div>
+                     </div>
+                  <?php
+                  }
+                  ?>
 
                   <div class="columns portfolio-item first">
                      <div class="item-wrap">
