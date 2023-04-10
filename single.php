@@ -124,10 +124,31 @@ $post_next = mysqli_fetch_assoc($post_next);
                      ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. </p>
 
                   <p><?php echo $post['text ']; ?></p>
+
+                  <?php
+                  $post_tags = mysqli_query($connect, "SELECT * FROM `post_tags`");
+                  $post_tags = mysqli_fetch_all($post_tags);
+                  $tags = mysqli_query($connect, "SELECT * FROM `tags`");
+                  $tags = mysqli_fetch_all($tags);
+                  ?>
+
                   <p class="tags">
                      <span>Tagged in </span>:
-                     <a href="#">orci</a>, <a href="#">lectus</a>, <a href="#">varius</a>, <a href="#">turpis</a>
+                     <?php
+                     foreach ($post_tags as $item) {
+                        if ($item[1] === $post['id']) {
+                           foreach ($tags as $tag) {
+                              if ($item[2] === $tag[0]) {
+                     ?>
+                                 <a href="tags.php?id=<?= $tag[0] ?>"><?= $tag[1] ?></a>,
+                     <?php
+                              }
+                           }
+                        }
+                     }
+                     ?>
                   </p>
+
 
                   <div class="bio cf">
 
@@ -253,26 +274,31 @@ $post_next = mysqli_fetch_assoc($post_next);
                      a sit amet mauris. Morbi accumsan ipsum velit. </div>
                </div>
 
+               <?php
+               $categories = mysqli_query($connect, "SELECT * FROM `categories`");
+               $categories = mysqli_fetch_all($categories);
+               ?>
+
                <div class="widget widget_categories">
                   <h5 class="widget-title">Categories</h5>
                   <ul class="link-list cf">
-                     <li><a href="#">Designs</a></li>
-                     <li><a href="#">Internet</a></li>
-                     <li><a href="#">Typography</a></li>
-                     <li><a href="#">Photography</a></li>
-                     <li><a href="#">Web Development</a></li>
-                     <li><a href="#">Projects</a></li>
-                     <li><a href="#">Other Stuff</a></li>
+                     <?php foreach ($categories as $item) {; ?>
+                        <li><a href="categories.php?id=<?= $item[0] ?>"><?= $item[1] ?></a></li>
+                     <?php }; ?>
                   </ul>
                </div>
+
+               <?php
+               $tags = mysqli_query($connect, "SELECT * FROM `tags`");
+               $tags = mysqli_fetch_all($tags);
+               ?>
 
                <div class="widget widget_tag_cloud">
                   <h5 class="widget-title">Tags</h5>
                   <div class="tagcloud cf">
-                     <a href="#">drupal</a>
-                     <a href="#">joomla</a>
-                     <a href="#">ghost</a>
-                     <a href="#">wordpress</a>
+                     <?php foreach ($tags as $item) {; ?>
+                        <a href="tags.php?id=<?= $item[0] ?>"><?= $item[1] ?></a>
+                     <?php }; ?>
                   </div>
                </div>
 
