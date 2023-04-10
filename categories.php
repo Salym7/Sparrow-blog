@@ -113,21 +113,21 @@ $categorie = mysqli_fetch_assoc($categorie);
                                 <time class="date" datetime="2014-01-14"><?php echo $post[4]; ?></time>
 
                                 <?php
-                                $categories = mysqli_query($connect, "SELECT * FROM `post_categories`");
+                                $post_categories = mysqli_query($connect, "SELECT * FROM `post_categories`");
+                                $post_categories = mysqli_fetch_all($post_categories);
+                                $categories = mysqli_query($connect, "SELECT * FROM `categories`");
                                 $categories = mysqli_fetch_all($categories);
-                                $tags = mysqli_query($connect, "SELECT * FROM `tags`");
-                                $tags = mysqli_fetch_all($tags);
                                 ?>
 
 
                                 <span class="categories">
                                     <?php
-                                    foreach ($categories as $item) {
+                                    foreach ($post_categories as $item) {
                                         if ($item[1] === $post[0]) {
-                                            foreach ($tags as $tag) {
-                                                if ($item[2] === $tag[0]) {
+                                            foreach ($categories as $categorie) {
+                                                if ($item[2] === $categorie[0]) {
                                     ?>
-                                                    / <a href="categories.php?id=<?= $tag[0] ?>"><?= $tag[1] ?></a>
+                                                    / <a href="categories.php?id=<?= $categorie[0] ?>"><?= $categorie[1] ?></a>
                                     <?php
                                                 }
                                             }
