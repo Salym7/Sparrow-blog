@@ -1,7 +1,14 @@
 <?php
 require_once 'config/connect.php';
-// $goods = mysqli_query($connect, "SELECT * FROM `goods`");
-// $goods = mysqli_fetch_all($goods);
+$posts = mysqli_query($connect, "SELECT * FROM `posts`");
+$posts = mysqli_fetch_all($posts);
+$posts = array_slice($posts, -3);
+$posts = array_reverse($posts);
+
+$works = mysqli_query($connect, "SELECT * FROM `works`");
+$works = mysqli_fetch_all($works);
+$works = array_slice($works, -4);
+$works = array_reverse($works);
 ?>
 
 <!DOCTYPE html>
@@ -142,61 +149,25 @@ require_once 'config/connect.php';
 
             <div id="portfolio-wrapper" class="bgrid-quarters s-bgrid-halves">
 
-                <div class="columns portfolio-item">
-                    <div class="item-wrap">
-                        <a href="portfolio.php">
-                            <img alt="" src="images/portfolio/geometrics.jpg">
-                            <div class="overlay"></div>
-                            <div class="link-icon"><i class="fa fa-link"></i></div>
-                        </a>
-                        <div class="portfolio-item-meta">
-                            <h5><a href="portfolio.php">Geometrics</a></h5>
-                            <p>Illustration</p>
+                <?php
+                foreach ($works as $work) {
+                ?>
+                    <div class="columns portfolio-item">
+                        <div class="item-wrap">
+                            <a href="portfolio.html">
+                                <img alt="" src="<?php echo $work[4]; ?>">
+                                <div class="overlay"></div>
+                                <div class="link-icon"><i class="fa fa-link"></i></div>
+                            </a>
+                            <div class="portfolio-item-meta">
+                                <h5><a href="portfolio.html"><?php echo $work[1]; ?></a></h5>
+                                <p>Illustrration</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="columns portfolio-item">
-                    <div class="item-wrap">
-                        <a href="portfolio.php">
-                            <img alt="" src="images/portfolio/console.jpg">
-                            <div class="overlay"></div>
-                            <div class="link-icon"><i class="fa fa-link"></i></div>
-                        </a>
-                        <div class="portfolio-item-meta">
-                            <h5><a href="portfolio.php">Console</a></h5>
-                            <p>Web Development</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="columns portfolio-item s-first">
-                    <div class="item-wrap">
-                        <a href="portfolio.php">
-                            <img alt="" src="images/portfolio/camera-man.jpg">
-                            <div class="overlay"></div>
-                            <div class="link-icon"><i class="fa fa-link"></i></div>
-                        </a>
-                        <div class="portfolio-item-meta">
-                            <h5><a href="portfolio.php">Camera Man</a></h5>
-                            <p>Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="columns portfolio-item">
-                    <div class="item-wrap">
-                        <a href="portfolio.php">
-                            <img alt="" src="images/portfolio/into-the-light.jpg">
-                            <div class="overlay"></div>
-                            <div class="link-icon"><i class="fa fa-link"></i></div>
-                        </a>
-                        <div class="portfolio-item-meta">
-                            <h5><a href="portfolio.php">Into The Light</a></h5>
-                            <p>Branding</p>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                }
+                ?>
 
             </div>
 
@@ -217,100 +188,42 @@ require_once 'config/connect.php';
         <div class="blog-entries">
 
             <!-- Entry -->
-            <article class="row entry">
 
-                <div class="entry-header">
+            <?php
+            foreach ($posts as $post) {
+            ?>
+                <article class="row entry">
 
-                    <div class="permalink">
-                        <a href="single.php"><i class="fa fa-link"></i></a>
+                    <div class="entry-header">
+
+                        <div class="permalink">
+                            <a href="single.php"><i class="fa fa-link"></i></a>
+                        </div>
+
+                        <div class="ten columns entry-title pull-right">
+                            <h3><a href="single.php"><?php echo $post[1]; ?></a></h3>
+                        </div>
+
+                        <div class="two columns post-meta end">
+                            <p>
+                                <time datetime="2014-01-31" class="post-date" pubdate="">Jan 31, 2014</time>
+                                <span class="dauthor">By Sakura Haruno</span>
+                            </p>
+                        </div>
+
                     </div>
 
-                    <div class="ten columns entry-title pull-right">
-                        <h3><a href="single.php">Proin gravida nibh vel velit auctor aliquet Aenean sollicitudin auctor.</a></h3>
-                    </div>
-
-                    <div class="two columns post-meta end">
-                        <p>
-                            <time datetime="2014-01-31" class="post-date" pubdate="">Jan 31, 2014</time>
-                            <span class="dauthor">By Sakura Haruno</span>
+                    <div class="ten columns offset-2 post-content">
+                        <p><?php echo $post[1]; ?>
+                            <a class="more-link" href="single.php">Read More<i class="fa fa-arrow-circle-o-right"></i></a>
                         </p>
                     </div>
 
-                </div>
+                </article> <!-- Entry End -->
+            <?php
+            }
+            ?>
 
-                <div class="ten columns offset-2 post-content">
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                        deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
-                        <a class="more-link" href="single.php">Read More<i class="fa fa-arrow-circle-o-right"></i></a>
-                    </p>
-                </div>
-
-            </article> <!-- Entry End -->
-
-            <!-- Entry -->
-            <article class="row entry">
-
-                <div class="entry-header">
-
-                    <div class="permalink">
-                        <a href="single.php"><i class="fa fa-link"></i></a>
-                    </div>
-
-                    <div class="ten columns entry-title pull-right">
-                        <h3><a href="single.php">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed.</a></h3>
-                    </div>
-
-                    <div class="two columns post-meta end">
-                        <p>
-                            <time datetime="2014-01-29" class="post-date" pubdate="">Jan 30, 2014</time>
-                            <span class="dauthor">By John Doe</span>
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="ten columns offset-2 post-content">
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                        deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
-                        <a class="more-link" href="single.php">Read More<i class="fa fa-arrow-circle-o-right"></i></a>
-                    </p>
-                </div>
-
-            </article> <!-- Entry End -->
-
-            <!-- Entry -->
-            <article class="row entry">
-
-                <div class="entry-header">
-
-                    <div class="permalink">
-                        <a href="single.php"><i class="fa fa-link"></i></a>
-                    </div>
-
-                    <div class="ten columns entry-title pull-right">
-                        <h3><a href="blog-single.php">Quis autem vel esse eum iure reprehenderit qui in ea voluptate velit esse.</a></h3>
-                    </div>
-
-                    <div class="two columns post-meta end">
-                        <p>
-                            <time datetime="2014-01-28" class="post-date" pubdate="">Jan 28, 2014</time>
-                            <span class="dauthor">By Naruto Uzumaki</span>
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="ten columns offset-2 post-content">
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                        deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
-                        <a class="more-link" href="single.php">Read More<i class="fa fa-arrow-circle-o-right"></i></a>
-                    </p>
-                </div>
-
-            </article> <!-- Entry End -->
 
         </div> <!-- Entries End -->
 

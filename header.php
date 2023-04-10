@@ -22,9 +22,9 @@
                             <li><a href="single.php">Post</a></li>
                         </ul>
                     </li>
-                    <li><span><a href="portfolio-index.php">Portfolio</a></span>
+                    <li><span><a href="portfolios.php">Portfolio</a></span>
                         <ul>
-                            <li><a href="portfolio-index.php">Portfolio Index</a></li>
+                            <li><a href="portfolios.php">Portfolios</a></li>
                             <li><a href="portfolio.php">Portfolio Entry</a></li>
                         </ul>
                     </li>

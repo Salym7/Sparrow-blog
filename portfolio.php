@@ -1,7 +1,22 @@
+<?php
+require_once 'config/connect.php';
+$work_id = $_GET['id'];
+$work = mysqli_query($connect, "SELECT * FROM `works` WHERE `id`='$work_id'");
+$work = mysqli_fetch_assoc($work);
+
+// $comments = mysqli_query($connect, "SELECT * FROM `comments`");
+// $comments = mysqli_fetch_all($comments);
+// // print_r($comments);  
+// function filter_by_second_value($arr)
+// {
+//    global $goods_id;
+//    return $arr[1] == $goods_id;
+// }
+// $comments = array_filter($comments, 'filter_by_second_value');
+// 
+?>
+
 <!DOCTYPE html>
-<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 8)|!(IE)]><!-->
 <html class="no-js" lang="en"> <!--<![endif]-->
 
 <head>
@@ -68,19 +83,16 @@
 
             <div id="secondary" class="four columns entry-details">
 
-               <h1>Geometrics.</h1>
+               <h1><?php echo $work[1]; ?></h1>
 
                <div class="entry-description">
 
-                  <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,
-                     nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate
-                     cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a
-                     ornare odio.</p>
+                  <p><?php echo $work[2]; ?></p>
 
                </div>
 
                <ul class="portfolio-meta-list">
-                  <li><span>Date: </span>January 2014</li>
+                  <li><span>Date: </span><?php echo $work['date']; ?></li>
                   <li><span>Client </span>Styleshout</li>
                   <li><span>Skills: </span>Photoshop, Photography, Branding</li>
                </ul>
@@ -93,17 +105,15 @@
 
                <div class="entry-media">
 
-                  <img src="images/portfolio/entries/geometric-backgrounds-01.jpg" alt="" />
-
-                  <img src="images/portfolio/entries/geometric-backgrounds-02.jpg" alt="" />
+                  <img src="<?php echo $work['image_path']; ?>" alt="" />
+                  <!-- 
+                  <img src="images/portfolio/entries/geometric-backgrounds-02.jpg" alt="" /> -->
 
                </div>
 
                <div class="entry-excerpt">
 
-                  <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,
-                     nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate
-                     cursus a sit amet mauris. Morbi accumsan ipsum velit. </p>
+                  <p><?php echo $work['text']; ?></p>
 
                </div>
 

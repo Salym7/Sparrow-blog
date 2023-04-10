@@ -1,8 +1,5 @@
 <?php
 require_once 'config/connect.php';
-$posts = mysqli_query($connect, "SELECT * FROM `posts`");
-$posts = mysqli_fetch_all($posts);
-
 ?>
 
 <!DOCTYPE html>
@@ -71,6 +68,12 @@ $posts = mysqli_fetch_all($posts);
          <div id="primary" class="eight columns">
             <?php
 
+
+            $posts = mysqli_query($connect, "SELECT * FROM `posts`");
+            $posts = mysqli_fetch_all($posts);
+            $posts = array_slice($posts, -3);
+            $posts = array_reverse($posts);
+
             $per_page = 3;
 
 
@@ -81,24 +84,42 @@ $posts = mysqli_fetch_all($posts);
 
                   <div class="entry-header cf">
 
-                     <h1><a href="single.php" title=""><?php echo $post[1]; ?></a></h1>
+                     <h1><a href="single.php?id=<?= $post[0] ?>" title=""><?php echo $post[1]; ?></a></h1>
 
                      <p class="post-meta">
 
                         <time class="date" datetime="2014-01-14"><?php echo $post[4]; ?></time>
-                        /
-                        <!-- <span class="categories">
-                        <a href="#">Design</a> /
-                        <a href="#">User Inferface</a> /
-                        <a href="#">Web Design</a>
-                     </span> -->
+
+                        <?php
+                        $categories = mysqli_query($connect, "SELECT * FROM `post_categories`");
+                        $categories = mysqli_fetch_all($categories);
+                        $tags = mysqli_query($connect, "SELECT * FROM `tags`");
+                        $tags = mysqli_fetch_all($tags);
+                        ?>
+
+
+                        <span class="categories">
+                           <?php
+                           foreach ($categories as $item) {
+                              if ($item[1] === $post[0]) {
+                                 foreach ($tags as $tag) {
+                                    if ($item[2] === $tag[0]) {
+                           ?>
+                                       / <a href="categories.php?id=<?= $tag[0] ?>"><?= $tag[1] ?></a>
+                           <?php
+                                    }
+                                 }
+                              }
+                           }
+                           ?>
+                        </span>
 
                      </p>
 
                   </div>
 
                   <div class="post-thumb">
-                     <a href="single.php" title=""><img src="<?php echo $post[2]; ?>" alt="post-image" title="post-image"></a>
+                     <a href="single.php?id=<?= $post[0] ?>" title=""><img src="<?php echo $post[2]; ?>" alt="post-image" title="post-image"></a>
                   </div>
 
                   <div class="post-content">
@@ -188,41 +209,32 @@ $posts = mysqli_fetch_all($posts);
                      a sit amet mauris. Morbi accumsan ipsum velit. </div>
                </div>
 
+               <?php
+               $categories = mysqli_query($connect, "SELECT * FROM `categories`");
+               $categories = mysqli_fetch_all($categories);
+               ?>
+
                <div class="widget widget_categories">
                   <h5 class="widget-title">Categories</h5>
                   <ul class="link-list cf">
-                     <li><a href="#">Designs</a></li>
-                     <li><a href="#">Internet</a></li>
-                     <li><a href="#">Typography</a></li>
-                     <li><a href="#">Photography</a></li>
-                     <li><a href="#">Web Development</a></li>
-                     <li><a href="#">Projects</a></li>
-                     <li><a href="#">Other Stuff</a></li>
+                     <?php foreach ($categories as $item) {; ?>
+                        <li><a href="categories.php?id=<?= $item[0] ?>"><?= $item[1] ?></a></li>
+                     <?php }; ?>
                   </ul>
                </div>
+
+               <?php
+               $tags = mysqli_query($connect, "SELECT * FROM `tags`");
+               $tags = mysqli_fetch_all($tags);
+               ?>
 
                <div class="widget widget_tag_cloud">
                   <h5 class="widget-title">Tags</h5>
                   <div class="tagcloud cf">
-                     <a href="#">drupal</a>
-                     <a href="#">joomla</a>
-                     <a href="#">ghost</a>
-                     <a href="#">wordpress</a>
+                     <?php foreach ($categories as $item) {; ?>
+                        <a href="tags.php?id=<?= $item[0] ?>"><?= $item[1] ?></a>
+                     <?php }; ?>
                   </div>
-               </div>
-
-               <div class="widget widget_photostream">
-                  <h5>Photostream</h5>
-                  <ul class="photostream cf">
-                     <li><a href="#"><img src="images/thumb.jpg" alt="thumbnail"></a></li>
-                     <li><a href="#"><img src="images/thumb.jpg" alt="thumbnail"></a></li>
-                     <li><a href="#"><img src="images/thumb.jpg" alt="thumbnail"></a></li>
-                     <li><a href="#"><img src="images/thumb.jpg" alt="thumbnail"></a></li>
-                     <li><a href="#"><img src="images/thumb.jpg" alt="thumbnail"></a></li>
-                     <li><a href="#"><img src="images/thumb.jpg" alt="thumbnail"></a></li>
-                     <li><a href="#"><img src="images/thumb.jpg" alt="thumbnail"></a></li>
-                     <li><a href="#"><img src="images/thumb.jpg" alt="thumbnail"></a></li>
-                  </ul>
                </div>
 
             </aside>

@@ -78,7 +78,7 @@ $works = mysqli_fetch_all($works);
                   ?>
                      <div class="columns portfolio-item">
                         <div class="item-wrap">
-                           <a href="portfolio.html">
+                           <a href="portfolio.php?id=<?= $work[0] ?>">
                               <img alt="" src="<?php echo $work[4]; ?>">
                               <div class="overlay"></div>
                               <div class="link-icon"><i class="fa fa-link"></i></div>
@@ -93,7 +93,7 @@ $works = mysqli_fetch_all($works);
                   }
                   ?>
 
-                  <div class="columns portfolio-item first">
+                  <!-- <div class="columns portfolio-item first">
                      <div class="item-wrap">
                         <a href="portfolio.html">
                            <img alt="" src="images/portfolio/geometrics.jpg">
@@ -175,7 +175,7 @@ $works = mysqli_fetch_all($works);
                            <p>Web Design</p>
                         </div>
                      </div>
-                  </div>
+                  </div> -->
 
                </div>
 
@@ -206,16 +206,16 @@ $works = mysqli_fetch_all($works);
                </span>
                <b><a href="#">2 Days Ago</a></b>
             </li>
-            <!--
+
             <li>
                <span>
-               This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
-               Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum
-               <a href="#">http://t.co/CGIrdxIlI3</a>
+                  This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
+                  Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum
+                  <a href="#">http://t.co/CGIrdxIlI3</a>
                </span>
                <b><a href="#">3 Days Ago</a></b>
             </li>
-            -->
+
          </ul>
 
          <p class="align-center"><a href="#" class="button">Follow us</a></p>
