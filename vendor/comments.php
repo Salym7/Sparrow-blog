@@ -1,11 +1,26 @@
 <?php
-require_once '../config/connect.php';
-print_r($_POST);
-$id_post = $_POST['id_post'];
-$author = $_POST['author'];
-$text = $_POST['text'];
-print_r($id_post);
+// require_once '../config/connect.php';
+$dbh = new PDO('mysql:host=localhost;dbname=sparrow_db', 'root', '');
 
-mysqli_query($connect, "INSERT INTO `comments` (`id`, `id_post`, `author` ,`text`) VALUES (NULL, '$id_post', '$author','$text');");
+if (count($_POST) > 0) {
+    $id_post = trim($_POST['id_post']);
+    $author = trim($_POST['author']);
+    $text = trim($_POST['text']);
 
-header("location: /single.php?id=$id_post");
+    $id_post = htmlspecialchars($id_post);
+    $author = htmlspecialchars($author);
+    $text = htmlspecialchars($text);
+
+    if ($id_post != '' && $author != '' && $text != '') {
+
+        $query = $dbh->prepare("INSERT INTO `comments` (`id_post`, `author`, `text`) VALUES (?, ?, ?)");
+
+        $query->bindParam(1, $id_post);
+        $query->bindParam(2, $author);
+        $query->bindParam(3, $text);
+
+        $query->execute();
+
+        header("location: /single.php?id=$id_post");
+    }
+}
